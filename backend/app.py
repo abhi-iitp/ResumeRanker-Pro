@@ -58,7 +58,24 @@ def classify_candidate(score):
         return "hold"
     else:
         return "reject"
+def get_candidate_rank(score):
+    try:
+        score = float(score)
+    except Exception:
+        score = 0
 
+    if score >= 90:
+        return 1
+    elif score >= 80:
+        return 2
+    elif score >= 70:
+        return 3
+    elif score >= 60:
+        return 4
+    elif score >= 50:
+        return 5
+    else:
+        return 6
 
 @app.route("/api/resume/parse", methods=["POST"])
 def parse_resume():
@@ -113,6 +130,7 @@ def parse_resume():
         "skills": skills,
         "job_matching": processed.get("job_matching", {}),
         "date": datetime.now().strftime("%d %b %Y"),
+        "rank": get_candidate_rank(score_value),
     }
 
     candidate_store.append(candidate)

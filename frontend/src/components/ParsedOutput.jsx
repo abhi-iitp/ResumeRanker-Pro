@@ -75,20 +75,78 @@ export default function ParsedOutput({ data }) {
       </div>
 
       {/* Matching Score */}
-      {matching.final_recommendation_score && (
-        <div className="card bg-gradient-to-r from-primary-50 to-blue-50 dark:from-primary-900/10 dark:to-blue-900/10 border-primary-200 dark:border-primary-800">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm font-medium text-gray-700 dark:text-gray-300">Final Recommendation Score</p>
-              <p className="text-3xl font-bold text-primary-700 dark:text-primary-400">{matching.final_recommendation_score}</p>
-            </div>
-            <div className="text-right">
-              <p className="text-xs text-gray-500 dark:text-gray-400">Skill Overlap: {matching.skill_overlap_score}</p>
-              <p className="text-xs text-gray-500 dark:text-gray-400">Semantic Match: {matching.semantic_match_score}</p>
-            </div>
+{matching.final_recommendation_score && (
+  <div className="card bg-gradient-to-r from-primary-50 to-blue-50 dark:from-primary-900/10 dark:to-blue-900/10 border-primary-200 dark:border-primary-800 overflow-visible">
+    
+    <div className="flex items-center justify-between gap-6 flex-wrap">
+      
+      {/* LEFT INFO */}
+      <div>
+        <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
+          Final Recommendation Score
+        </p>
+
+        <div className="mt-3 space-y-1">
+          <p className="text-xs text-gray-500 dark:text-gray-400">
+            Skill Overlap: {matching.skill_overlap_score}
+          </p>
+
+          <p className="text-xs text-gray-500 dark:text-gray-400">
+            Semantic Match: {matching.semantic_match_score}
+          </p>
+        </div>
+      </div>
+
+      {/* RIGHT CIRCLE */}
+      <div className="relative w-28 h-28 shrink-0">
+        <svg className="w-28 h-28 rotate-[-90deg]" viewBox="0 0 120 120">
+          
+          {/* Background */}
+          <circle
+            cx="60"
+            cy="60"
+            r="50"
+            stroke="rgba(255,255,255,0.12)"
+            strokeWidth="10"
+            fill="none"
+          />
+
+          {/* Progress */}
+          <circle
+            cx="60"
+            cy="60"
+            r="50"
+            stroke="url(#gradient)"
+            strokeWidth="10"
+            fill="none"
+            strokeLinecap="round"
+            strokeDasharray={`${(parseFloat(matching.final_recommendation_score) || 0) * 3.14} 314`}
+          />
+
+          <defs>
+            <linearGradient id="gradient">
+              <stop offset="0%" stopColor="#6366f1" />
+              <stop offset="100%" stopColor="#06b6d4" />
+            </linearGradient>
+          </defs>
+        </svg>
+
+        {/* CENTER TEXT */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-center">
+            <p className="text-2xl font-bold text-primary-700 dark:text-primary-400">
+              {matching.final_recommendation_score}
+            </p>
+
+            <p className="text-[10px] text-gray-500 dark:text-gray-400">
+              Match
+            </p>
           </div>
         </div>
-      )}
+      </div>
+    </div>
+  </div>
+)}
 
       {/* Top Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

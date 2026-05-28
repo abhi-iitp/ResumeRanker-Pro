@@ -111,7 +111,7 @@ export default function ResumeUpload() {
 
             <h3 className="text-xl font-semibold">Drag & drop resume here</h3>
             <p className="mt-2 text-sm text-white/50">
-              Supported formats: PDF, DOCX
+              Supported formats: PDF, DOCX, PNG, JPG, JPEG
             </p>
 
             <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -139,12 +139,12 @@ export default function ResumeUpload() {
             </div>
 
             <input
-              ref={fileInputRef}
-              type="file"
-              accept=".pdf,.docx"
-              className="hidden"
-              onChange={(e) => handleFileSelect(e.target.files?.[0])}
-            />
+  ref={fileInputRef}
+  type="file"
+  accept=".pdf,.docx,.png,.jpg,.jpeg"
+  className="hidden"
+  onChange={(e) => handleFileSelect(e.target.files?.[0])}
+/>
 
             {file && (
               <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm">
@@ -280,11 +280,13 @@ export default function ResumeUpload() {
                 </div>
 
                 <div className="rounded-3xl bg-black/20 border border-white/10 p-5">
-                  <p className="text-sm text-white/40">Candidate Ranking</p>
-                  <h3 className="mt-3 text-3xl font-bold text-fuchsia-300">
-                    #{Math.floor(Math.random() * 10) + 1}
-                  </h3>
-                </div>
+  <p className="text-sm text-white/40">AI Status</p>
+
+  <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-cyan-500/10 px-4 py-2 text-cyan-300 border border-cyan-400/20">
+    <Sparkles className="h-4 w-4" />
+    AI Matching Enabled
+  </div>
+</div>
               </div>
             </div>
           )}
